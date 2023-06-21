@@ -1,4 +1,5 @@
-//project outcome - for of, getElementsByClassName, querySelector, classList.remove, import/export, .includes(), .filter()
+//project outcome - for of, getElementsByClassName, querySelector, classList.remove, import/export, 
+//.includes(), .filter()
 //parentElement,
 // event.target.id, 
 //classList
@@ -8,13 +9,24 @@ import { catsData } from "./data.js"
 
 const emotionRadios = document.getElementById("emotion-radios")
 const getImageBtn = document.getElementById('get-image-btn')
+const gifsOnlyOption = document.getElementById("gifs-only-option")
 
 getImageBtn.addEventListener('click', () => {
     const checkedRadio = document.querySelector("input[type='radio']:checked")
+    const isGif = gifsOnlyOption.checked
+    const matchingEmotionArray = catsData.filter((object) => {
+        if(isGif) {
+            return object.emotionTags.includes(checkedRadio.value) && object.isGif
+        } else {
+            return object.emotionTags.includes(checkedRadio.value)
+        }
+    })
+    console.log(matchingEmotionArray)
+    // console.log(isGif)
     if(!checkedRadio) {
         console.log('select the emotion')
     } else {
-        console.log(checkedRadio.value)
+        // console.log(checkedRadio.value)
     }
 })
 
