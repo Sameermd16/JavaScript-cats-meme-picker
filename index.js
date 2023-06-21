@@ -1,8 +1,30 @@
 //project outcome - for of, getElementsByClassName, querySelector, classList.remove, import/export, .includes(), .filter()
-
+//parentElement,
+// event.target.id, 
+//classList
+//accent-color : controls color inside the radio input
+//getElementsByClassName
 import { catsData } from "./data.js"
 
 const emotionRadios = document.getElementById("emotion-radios")
+const getImageBtn = document.getElementById('get-image-btn')
+
+getImageBtn.addEventListener('click', () => {
+    const checkedRadio = document.querySelector("input[type='radio']:checked")
+    if(!checkedRadio) {
+        console.log('select the emotion')
+    } else {
+        console.log(checkedRadio.value)
+    }
+})
+
+emotionRadios.addEventListener('change', (e) => {
+    const radios = document.getElementsByClassName('radio')
+    for(let eachItem of radios) {
+        eachItem.classList.remove('highlight')
+    }
+    document.getElementById(e.target.id).parentElement.classList.add('highlight')
+})
 
 //catsData = [{}, {}, {}, {}, {}....]
 
@@ -14,7 +36,13 @@ function getEmotionsArray(cats){
         // console.log(cat.emotionTags)
         for (let emotion of cat.emotionTags) {
             // console.log(emotion) 
-            emotionsArray.push(emotion)
+            if(!emotionsArray.includes(emotion)) {
+                //push
+                emotionsArray.push(emotion)
+            } else {
+                //don't push
+
+            }
         }
         // console.log(emotionsArray)
     }
@@ -37,7 +65,18 @@ function renderEmotionsRadios(cats) {
 
     //for of 
     for (let emotion of emotions) {
-        radioItems += `<p>${emotion}</p>`
+        radioItems += `
+            <div class="radio">
+                <label for="${emotion}">${emotion}</label>
+                <input 
+                    type="radio"
+                    id="${emotion}"
+                    value="${emotion}"
+                    name="emotions"
+                />
+            </div>
+        
+        `
     }
     emotionRadios.innerHTML = radioItems
 
@@ -51,3 +90,24 @@ function renderEmotionsRadios(cats) {
     // }
 }
 renderEmotionsRadios(catsData)
+
+
+
+
+
+
+
+
+
+// const shoppingList = ['chick', 'flick', 'slick']
+
+// if(!shoppingList.includes(itemInput.value)) {  // adding chick -> normally gives true which runs the code. I am making it reverse ! false which does not rus 
+//     //adding 'sheep' -> normally gives false but making it ! reverse -> true then runs the code 
+//     //then add
+//     shoppingList.push(itemInput.value)
+//     render()
+// } else {
+//     //don't add
+//     itemInput.value = ''
+//     console.log('no duplicates')
+// }
