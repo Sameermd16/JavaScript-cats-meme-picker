@@ -28,6 +28,7 @@ getImageBtn.addEventListener('click', () => {
     } else {
         // console.log(checkedRadio.value)
     }
+    return matchingEmotionArray
 })
 
 emotionRadios.addEventListener('change', (e) => {
@@ -37,6 +38,21 @@ emotionRadios.addEventListener('change', (e) => {
     }
     document.getElementById(e.target.id).parentElement.classList.add('highlight')
 })
+
+function getSingleCatObject() {
+    const catsArray = matchingEmotionArray
+    // console.log(catsArray)
+    if(catsArray.length === 1) {
+        console.log(catsArray[0])
+    } else {
+        const randomNumber = Math.floor(Math.random() * catsArray.length)
+        console.log(catsArray[randomNumber])
+    }
+}
+
+function renderCat() {
+    getSingleCatObject()  //temp
+}
 
 //catsData = [{}, {}, {}, {}, {}....]
 
